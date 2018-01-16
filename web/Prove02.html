@@ -4,23 +4,40 @@
 	<link rel="stylesheet" type="text/css" href="Prove02.css">
 	<meta charset="utf-8">
 	<title>HomePage</title>
+
+	<script type="text/javascript">
+		function makeBold(x) {
+			x.style.fontWeight = "bold"
+		}
+
+		function makeNormal(x) {
+			x.style.fontWeight = "normal"
+		}
+
+		function makeBig(x) {
+			x.style.fontSize = "20px"
+		}
+
+		function makeSmall(x) {
+			x.style.fontSize = "16px"
+		}
+	</script>
 </head>
 
 <body>
-
 <header>
 <h1> Welocme to my Home Page</h1>
 </header>
 
 <nav>
 	<br/>
-	<a href="assignments.html"> Assignments </a>
+	<a href="assignments.html" onmouseover="makeBig(this)" onmouseout="makeSmall(this)"> Assignments </a>
 </nav>
 <hr/>
 
 <div id="baseDiv">
 <div id="contentDiv">
-<p> Hello, My name is Michael Graver.  I am a student here at BYUI and I 
+<p onmouseover="makeBold(this)" onmouseout="makeNormal(this)"> Hello, My name is Michael Graver.  I am a student here at BYUI and I 
 	am majoring in Computer Sceince.  It's a great major and I am glad I chose it. My favorite class
 	so far is CS246-Software Design and Devlopment.  The reason I liked this class so much is because
 	it allows students to take what they have learned from CS124 to CS235 and really see what they
@@ -31,7 +48,7 @@
 	to build our own project from scratch with everything we learn during the smester. 
 </p>
 
-<p>
+<p onmouseover="makeBold(this)" onmouseout="makeNormal(this)">
 	My favorite hobby is playing video games.  It's something I have always enjoyed doing with my 
     free time to wind down after a long days work.  I play lot less now than when I was in high school
     that is probably for the best though because we all know that video games can very easily be a 
@@ -40,12 +57,12 @@
     good things about the franchise but have never had the opportunity to play the games personally myself. After
     watching some gameplay and hearing that this is a great time for new comers to start playing I though 
     "This is the next game I am going to get."  If you want more information about the game you can find 
-    its homepage <a href="http://www.monsterhunterworld.com/us/">Here</a>.  Heres a screen shot of the 
-    upcoming game.
+    its homepage <a href="http://www.monsterhunterworld.com/us/" onmouseover="makeBig(this)" onmouseout="makeSmall(this)">
+    Here</a>.  Heres a screen shot of the upcoming game.
     <img src="MonsterHunterWorld-10-2.jpg" width="640" height="360">
 </p>
 
-<p>
+<p onmouseover="makeBold(this)" onmouseout="makeNormal(this)">
 	One last thing I wanted to add was my favorite scripture below.  Its a saying that relates
 	strongly to computer science becasue all computers are is a series of binary values that 
 	allows us to conduct intense scientific caluclation or playing reltic video games. 
@@ -58,6 +75,25 @@
 
  7: And the Lord God doth work by means to bring about his great and eternal purposes; and by very small means the Lord doth confound the wise and bringeth about the salvation of many souls. <br/> <br/>
 </blockquote>
+
+<form action="Prove02.php">
+	<legend>Feedback</legend>
+	<fieldset>
+		<div id="left">
+			Comments: <br/>                                        
+			<textarea></textarea> 
+		</div> 
+		<div id="right">
+			Did you like it: <br/> 
+			<ul>
+				<li><input type="radio" name="response" value="Yes" checked="checked"> Yes</li>
+				<li><input type="radio" name="response" value="No"> No</li>
+			</ul>
+			<br>
+			<input type="submit" name="submit">
+		</div>
+	</fieldset>
+</form>
 
 </div>
 </div>
