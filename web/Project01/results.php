@@ -34,14 +34,14 @@
 		if (empty($rows)) 
 		{
 			$_SESSION['failed_search'] = true; 
-			$URL = "https://afternoon-coast-14408.herokuapp.com/project01/home.php";
+			$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/home.php";
 			header("Location: " . $URL);
 			exit();		
 		}
 		else
 		{
 			$recipe_id = $rows[0]['id'];
-			$URL = "https://afternoon-coast-14408.herokuapp.com/project01/recipe.php?recipeID=$recipe_id";
+			$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/recipe.php?recipeID=$recipe_id";
 			header("Location: " . $URL);
 			exit();	
 		}
