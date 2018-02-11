@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="project01.css">
 	<title>Your Favorites</title>
 </head>
 <body>
