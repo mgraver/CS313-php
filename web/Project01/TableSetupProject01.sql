@@ -125,3 +125,6 @@ JOIN users u ON uf.User_ID = 1;
 
 SELECT r.Name, r.Description FROM users u JOIN user_favorite uf ON u.ID = uf.User_ID JOIN favorite f ON uf.Favorite_ID = f.ID 
 JOIN recipes r ON f.Recipe_ID = r.ID;
+
+/* ingridents
+SELECT i.name, ri.amount, u.unit FROM recipe_ingrident ri JOIN ingredients i ON ri.recipe_id = 2 AND ri.ingredient_id = i.id LEFT JOIN unit u ON ri.unit = u.id;*/

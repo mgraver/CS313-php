@@ -25,15 +25,18 @@ li a {
 }
 
 table{
-    margin-left: 25%;
+    margin-left: auto;
     margin-right: auto;
-    width: 75%;
+    width: 60%;
+}
+
+td {
+    padding: 20px;
 }
 
 li a:hover {
     background-color: #111;
 }
-
 
 input[type=text], input[type=password] {
     width: 35%;
@@ -52,6 +55,11 @@ div {
 div pre {
     font-family: serif;
     font-size: 17px;
+}
+
+textarea {
+    resize: none;
+    overflow: auto;
 }
 
 #welcome {

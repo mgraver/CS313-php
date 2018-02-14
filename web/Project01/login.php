@@ -19,10 +19,17 @@
 			print "<p id=\"login_error\">Your username or password was invalid.</p>\n";
 			$_SESSION['failed_login'] = false;
 		}
+		if (isset($_SESSION['failed_create']) && $_SESSION['failed_create']) {
+			print "<p id=\"login_error\">The account could not be created. Username already used or Blanck Password</p>\n";
+			$_SESSION['failed_create'] = false;
+		}
 	?>
 	</div> <br/>
 	<br/>
-	<div style="text-align: center;"><input type="submit" value="Login" class="black-button" style="text-align: center;"></div><br/>
+	<div style="text-align: center;">
+		<input type="submit" name="submit" value="Login" class="black-button" style="text-align: center;">
+		<input type="submit" name="submit" value="Create User" class="black-button" style="text-align: center;">
+	</div><br/>
 	</form>
 </body>
 </html>

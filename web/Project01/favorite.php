@@ -31,30 +31,33 @@
 		}
 	?>
 
+	<ul>
+  		<li><a href="home.php">Home</a></li>
+	</ul>	
 	<h1>Your Favorites List</h1>
-	<a href="recipe.php"></a>
-	<table>
-		<?php 
-		$stmt = $db->prepare("SELECT Name, Description,r.ID FROM users u JOIN user_favorite uf ON :id = uf.User_ID 
-			JOIN favorite f ON uf.Favorite_ID = f.ID JOIN recipes r ON f.Recipe_ID = r.ID");
-		$stmt->bindValue(":id", $_SESSION['uID'], PDO::PARAM_INT);
-		$stmt->execute();
-		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		
-		#print_r($rows);
-		foreach ($rows as $row) 
-		{
-			$name = $row['name'];
-			$description = $row['description'];
-			$recipe_id = $row['id'];
+	
+		<table>
+			<?php 
+				$stmt = $db->prepare("SELECT Name, Description, r.ID, f.id AS favorite_id FROM users u JOIN user_favorite uf ON :id = u.id
+					JOIN favorite f ON uf.Favorite_ID = f.ID JOIN recipes r ON f.Recipe_ID = r.ID");
+				$stmt->bindValue(":id", $_SESSION['uID'], PDO::PARAM_INT);
+				$stmt->execute();
+				$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				
+				foreach ($rows as $row) 
+				{
+					$name = $row['name'];
+					$description = $row['description'];
+					$recipe_id = $row['id'];
+					$favorite_id = $row['favorite_id'];
 
-			print("<tr>\n");
-			print("<td><a href=\"recipe.php?recipeID=$recipe_id\">$name</a></td>");
-			print("<td>$description</td>");
-			print("</tr>\n");
-		}
-		?>
-	</table>
+					print("<tr>\n");
+					print("<td><a href=\"recipe.php?recipeID=$recipe_id&fID=$favorite_id\">$name</a></td>");
+					print("<td>$description</td>");
+					print("</tr>\n");
+				}
+			?>
+		</table>
 
 </body>
 </html>
