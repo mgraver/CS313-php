@@ -44,7 +44,7 @@
   			if (isset($_GET['fID'])) 
   			{
   				$fID = $_GET['fID'];
-  			 	print "<li><a href=\"remove_fav.php?fID=$fID\">Remove Favorite</a></li>";
+  			 	print "<li><a href=\"https://afternoon-coast-14408.herokuapp.com/Project01/remove_fav.php?fID=$fID\">Remove Favorite</a></li>";
   			} 
   		?>
 </ul>	
