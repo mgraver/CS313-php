@@ -39,7 +39,7 @@
 		<table>
 			<?php 
 				$stmt = $db->prepare("SELECT Name, Description, r.ID, f.id AS favorite_id FROM users u JOIN user_favorite uf ON :id = u.id
-					JOIN favorite f ON uf.Favorite_ID = f.ID JOIN recipes r ON f.Recipe_ID = r.ID");
+										AND :id = uf.user_id JOIN favorite f ON uf.Favorite_ID = f.ID JOIN recipes r ON f.Recipe_ID = r.ID");
 				$stmt->bindValue(":id", $_SESSION['uID'], PDO::PARAM_INT);
 				$stmt->execute();
 				$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
