@@ -63,7 +63,7 @@
 		$stmt->execute();
 		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-		if (!empty($rows) || empty($password)) 
+		if (!empty($rows) || empty($password)  || empty($username)) 
 		{
 			$_SESSION['failed_create'] = true;
 			$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/login.php";
