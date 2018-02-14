@@ -39,13 +39,13 @@
 		if (empty($rows))
 		{
 			$_SESSION['failed_login'] = true;
-			$URL = "http://localhost/project01/login.php";
+			$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/login.php";
 			header("Location: " . $URL);
 			exit();
 		}
 		else
 		{
-			$URL = "http://localhost/project01/home.php";
+			$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/home.php";
 			$_SESSION['username'] = $username;
 			$_SESSION['uID'] = $rows[0]['id'];
 			header("Location: " . $URL);
@@ -66,7 +66,7 @@
 		if (!empty($rows) || empty($password)) 
 		{
 			$_SESSION['failed_create'] = true;
-			$URL = "http://localhost/project01/login.php";
+			$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/login.php";
 			header("Location: " . $URL);
 			exit();
 		} 
@@ -79,7 +79,7 @@
 
 			$_SESSION['username'] = $username;
 			$_SESSION['uID'] = $db->lastInsertID('users_id_seq');
-			$URL = "http://localhost/project01/home.php";
+			$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/home.php";
 			header("Location: " . $URL);
 			exit();	
 		}
