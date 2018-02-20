@@ -24,36 +24,50 @@
 		 die();
 		}
 
-	$search = $_GET['search'];
-
-	$stmt = $db->prepare("SELECT name, description, id FROM recipes WHERE name=:search");
-		$stmt->bindValue(":search", $search, PDO::PARAM_STR);
-		$stmt->execute();
-		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$param = "%{$_GET['search']}%";
+	$stmt = $db->prepare("SELECT name, description, id FROM recipes WHERE name LIKE ?");
+	$stmt->bindValue(1, $param, PDO::PARAM_STR);
+	$stmt->execute();
+	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		if (empty($rows)) 
 		{
 			$_SESSION['failed_search'] = true; 
-			$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/home.php";
+			$URL = "http://localhost/project01/home.php";
 			header("Location: " . $URL);
 			exit();		
 		}
-		else
-		{
-			$recipe_id = $rows[0]['id'];
-			$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/recipe.php?recipeID=$recipe_id";
-			header("Location: " . $URL);
-			exit();	
-		}
  ?>
 
-<!-- Will impliment a result padge when full text search funtionality is working.-->
  <!DOCTYPE html>
  <html>
  <head>
+ 	<link rel="stylesheet" href="project01.css">
  	<title>Results</title>
  </head>
  <body>
- 
+ 	<ul>
+  		<li><a href="home.php">Home</a></li>
+	</ul>
+ 	<h1> Recipes </h1>
+ 	<table>
+ 		<tr>
+ 			<th> Name </th>
+ 			<th> Description </th>
+ 		</tr>
+			<?php 
+				foreach ($rows as $row) 
+				{
+					$name = $row['name'];
+					$description = $row['description'];
+					$recipe_id = $row['id'];
+
+					print("<tr>\n");
+					print("<td><a href=\"recipe.php?recipeID=$recipe_id\">$name</a></td>");
+					print("<td><p>$description</p></td>");
+					print("</tr>\n");
+				}
+			?>
+		</table>
  </body>
  </html>

@@ -53,7 +53,7 @@
 
 					print("<tr>\n");
 					print("<td><a href=\"recipe.php?recipeID=$recipe_id&fID=$favorite_id\">$name</a></td>");
-					print("<td>$description</td>");
+					print("<td><p>$description</p></td>");
 					print("</tr>\n");
 				}
 			?>

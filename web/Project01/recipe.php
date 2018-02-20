@@ -33,7 +33,7 @@
 
 			$recipeID = $_GET["recipeID"];
 
-			$stmt = $db->prepare("SELECT name, rating, description FROM recipes WHERE id = :id");
+			$stmt = $db->prepare("SELECT name, rating, description, imgpath FROM recipes WHERE id = :id");
 			$stmt->bindValue(':id', $recipeID, PDO::PARAM_INT);
 			$stmt->execute();
 			$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -50,14 +50,20 @@
 </ul>	
 <h1> <?php  print $rows[0]['name'];?> </h1> <br/>
 
-<div>
-<pre>
-Rating: <?php  print $rows[0]['rating']; ?>
-
-
-Description: <?php print $rows[0]['description']; ?>
-</pre>
+<div id = "recipe_header">
+	<div>
+		<img src=<?php print "\"" . $rows[0]['imgpath'] . "\"" ?>>
+	
+		<p>
+			Rating: <?php  print $rows[0]['rating']; ?> 
+		</p>
+		<br/> <br/>
+		<p>
+			Description: <?php print $rows[0]['description']; ?>
+		</p>
+	</div>
 </div>
+<br>
 
 <div id="ingridents">
 	<?php
@@ -67,10 +73,10 @@ Description: <?php print $rows[0]['description']; ?>
 		$stmt->execute();
 		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-		print "Ingridents: <br/>\n";
+		print "<h3> Ingridents: </h3>\n";
 		foreach ($rows as $row)
 		{
-			printf("%-25s  %-25d  %s\n", $row['name'], $row['amount'], $row['unit']);
+			printf("<pre> %-20s  %-15d  %s </pre>\n", $row['name'], $row['amount'], $row['unit']);
 		}
 	?>
 </div>

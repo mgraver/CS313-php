@@ -30,9 +30,8 @@
 		$password = $_POST['Password'];
 		$URL;
 
-		$stmt = $db->prepare("SELECT id FROM users WHERE username=:name AND password=:pass");
+		$stmt = $db->prepare("SELECT id, password FROM users WHERE username=:name");
 		$stmt->bindValue(':name', $username, PDO::PARAM_STR);
-		$stmt->bindValue(':pass', $password, PDO::PARAM_STR); 
 		$stmt->execute();
 		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -45,11 +44,21 @@
 		}
 		else
 		{
-			$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/home.php";
-			$_SESSION['username'] = $username;
-			$_SESSION['uID'] = $rows[0]['id'];
-			header("Location: " . $URL);
-			exit();		
+			if (password_verify($password, $rows[0]['password'])) 
+			{
+				$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/home.php";
+				$_SESSION['username'] = $username;
+				$_SESSION['uID'] = $rows[0]['id'];
+				header("Location: " . $URL);
+				exit();		
+			}
+			else
+			{
+				$_SESSION['failed_login'] = true;
+				$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/login.php";
+				header("Location: " . $URL);
+				exit();
+			}
 		}
 	}
 	else  #Create a new user
@@ -58,12 +67,14 @@
 		$password = $_POST['Password'];
 		$URL;
 
+		$hashedPass = password_hash($password, PASSWORD_DEFAULT);
+
 		$stmt = $db->prepare("SELECT id FROM users WHERE username=:name");
 		$stmt->bindValue(':name', $username, PDO::PARAM_STR);
 		$stmt->execute();
 		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-		if (!empty($rows) || empty($password)  || empty($username)) 
+		if (!empty($rows) || empty($password)) 
 		{
 			$_SESSION['failed_create'] = true;
 			$URL = "https://afternoon-coast-14408.herokuapp.com/Project01/login.php";
@@ -74,7 +85,7 @@
 		{
 			$stmt = $db->prepare("INSERT INTO users (Username, Password) VALUES (:usnm, :psswd)");
 			$stmt->bindValue(':usnm', $username, PDO::PARAM_STR);
-			$stmt->bindValue(':psswd', $password, PDO::PARAM_STR);
+			$stmt->bindValue(':psswd', $hashedPass, PDO::PARAM_STR);
 			$stmt->execute();
 
 			$_SESSION['username'] = $username;
