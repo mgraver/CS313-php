@@ -95,7 +95,7 @@
 	<form action="add_to_favorite.php" method="get">
 
 		<?php  
-			$stmt = $db->prepare("SELECT f.Recipe_ID FROM users u JOIN user_favorite uf ON :uID = u.id
+			$stmt = $db->prepare("SELECT f.Recipe_ID FROM users u JOIN user_favorite uf ON :uID = u.id AND u.id = uf.user_id
 									JOIN favorite f ON uf.Favorite_ID = f.ID");
 			$stmt->bindValue(':uID', $_SESSION['uID'], PDO::PARAM_INT);
 			$stmt->execute();
@@ -105,8 +105,7 @@
 			foreach ($rows as $row) 
 			{
 				if ($row['recipe_id'] == $recipeID)
-					$isFavorite = true;
-				
+					$isFavorite = true;	
 			}
 
 			if (!$isFavorite) 
